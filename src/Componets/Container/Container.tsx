@@ -3,7 +3,7 @@ import Content from "./Content/Content";
 
 const Container = () => {
   return (
-    <div>
+    <div className=" h-full bg-[#F8F8FB]">
       <SideBar />
       <Content />
     </div>

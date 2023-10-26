@@ -10,8 +10,12 @@ const List = () => {
 
   const invoices = useSelector(getInvoices);
   return (
-    <div>
-      <Item />
+    <div className="flex  w-[45.625rem]  my-0 mx-auto  ">
+      <ul>
+        {invoices.map((invoice) => (
+          <Item key={invoice.id} invoice={invoice} />
+        ))}
+      </ul>
     </div>
   );
 };
