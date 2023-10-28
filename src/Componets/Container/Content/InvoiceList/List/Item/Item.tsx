@@ -1,5 +1,8 @@
 import { useDispatch } from "react-redux";
-
+import { useNavigate } from "react-router-dom";
+import paidRound from "../../../../../../assets/img/paidRound.svg";
+import pendingRound from "../../../../../../assets/img/pendingRound.svg";
+import draftRound from "../../../../../../assets/img/draftRound.svg";
 export type InvoiceT = {
   id: string;
   date: string;
@@ -9,7 +12,7 @@ export type InvoiceT = {
 };
 
 const Item = ({ invoice }) => {
-  const vacancyDetails = {
+  const invoicePreview = {
     id: invoice.id,
     date: invoice.date,
     name: invoice.name,
@@ -19,15 +22,17 @@ const Item = ({ invoice }) => {
     details: invoice.details,
   };
 
-   const paymentStateStyles= 
-
-
+  const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const viewDetails = (id) => {
+    navigate(`/details/${id}`);
+  };
 
   return (
     <div className=" flex  justify-between rounded mb-[1.5rem] w-[45.625rem]  h-[4.5rem] bg-[#fff] ">
       <div className=" flex justify-between items-center w-1/2">
-        <div className="text-[#7E88C3]">
+        <div className="text-[#7E88C3] ml-[1rem]">
           #
           <span className="text-[#0C0E16] text-[0.9375rem] tracking -[-0.01563rem] font-bold">
             {invoice.id}
@@ -48,10 +53,30 @@ const Item = ({ invoice }) => {
           ${""}
           {invoice.price}
         </div>
-        <div className="w-[6.5rem] h-[2.5rem]  rounded">
-          {invoice.paymentState}
+        <div className="w-[6.5rem] h-[2.5rem]  flex rounded">
+          {invoice.paymentState === "Pending" ? (
+            <div className="bg-[#fff8f0] flex items-center rounded w-[6.5rem] h-[2.5rem] justify-center ">
+              <img
+                className="w-[0.5rem]"
+                src={pendingRound}
+                alt="pendingRound"
+              />
+              <p className="text-[#FF8F00] ml-[0.5rem]">Pending</p>
+            </div>
+          ) : invoice.paymentState === "Paid" ? (
+            <div className="bg-[#f3fcf9] rounded flex items-center w-[6.5rem] h-[2.5rem] justify-center">
+              <img className="w-[0.5rem]" src={paidRound} alt="paidRound" />
+              <p className="text-[#33D69F] ml-[0.5rem]">Paid</p>
+            </div>
+          ) : (
+            <div className="bg-[#e6e6e8] rounded flex items-center w-[6.5rem] h-[2.5rem] justify-center">
+              <img className="w-[0.5rem]" src={draftRound} alt="draftRound" />
+              <p className="text-[#373B53] ml-[0.5rem]">Draft</p>
+            </div>
+          )}
         </div>
-        <div className={paymentStateStyles}>
+
+        <div onClick={() => viewDetails(invoice.id)}>
           <img src={invoice.details} alt="details" />
         </div>
       </div>
