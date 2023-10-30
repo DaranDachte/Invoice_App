@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import paidRound from "../../../../../../assets/img/paidRound.svg";
 import pendingRound from "../../../../../../assets/img/pendingRound.svg";
 import draftRound from "../../../../../../assets/img/draftRound.svg";
+import details from "../../../../../../assets/img/details.svg";
 export type InvoiceT = {
   id: string;
   date: string;
@@ -76,8 +77,8 @@ const Item = ({ invoice }) => {
           )}
         </div>
 
-        <div onClick={() => viewDetails(invoice.id)}>
-          <img src={invoice.details} alt="details" />
+        <div className="cursor-pointer" onClick={() => viewDetails(invoice.id)}>
+          <img src={details} alt="details" />
         </div>
       </div>
     </div>

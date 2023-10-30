@@ -5,7 +5,6 @@ export type Invoice = {
   date: string;
   price: string;
   paymentState: string;
-  details: string;
   sentTo: string;
   purpose: string;
   paymentDue: string;
