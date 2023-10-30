@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { Invoice } from "../../Helpers/domain";
 import { makeid5 } from "../../Helpers/MakeId";
-import details from "../../assets/img/details.svg";
 
 const initialState: Invoice[] = [
   {
@@ -11,15 +10,14 @@ const initialState: Invoice[] = [
     surname: "Silverhand",
     price: "1,200",
     paymentState: "Paid",
-    details: details,
     sentTo: "abs@mail.com",
-    purpose: "sdf",
-    paymentDue: "asdasd",
-    customerAdress: "2134",
-    streetAdress: "wrwer",
-    postCode: "sadasd",
-    city: "asdsda",
-    country: "sdfdfs",
+    purpose: "Graphic Design",
+    paymentDue: "12 October",
+    customerAdress: "12 October",
+    streetAdress: " Freidhof str 12",
+    postCode: "42356",
+    city: "Berlin",
+    country: "Germany",
     items: [
       {
         name: "Banner Design",
@@ -41,15 +39,14 @@ const initialState: Invoice[] = [
     surname: "Gore",
     price: "1,500",
     paymentState: "Pending",
-    details: details,
-    sentTo: "abs@mail.com",
-    purpose: "sdf",
-    paymentDue: "asdasd",
-    customerAdress: "2134",
-    streetAdress: "wrwer",
-    postCode: "sadasd",
-    city: "asdsda",
-    country: "sdfdfs",
+    sentTo: "abw@mail.com",
+    purpose: "Video Design",
+    paymentDue: "13 October",
+    customerAdress: "Freelove str 14",
+    streetAdress: "Danziger str 13",
+    postCode: "12342",
+    city: "Köln",
+    country: "Germany",
     items: [
       {
         name: "Banner Design",
@@ -70,23 +67,23 @@ const initialState: Invoice[] = [
     surname: "Gahan",
     price: "1,000",
     paymentState: "Paid",
-    details: details,
-    sentTo: "abs@mail.com",
-    purpose: "sdf",
+
+    sentTo: "abt@mail.com",
+    purpose: "Article Design",
     paymentDue: "asdasd",
     customerAdress: "2134",
     streetAdress: "wrwer",
-    postCode: "sadasd",
-    city: "asdsda",
-    country: "sdfdfs",
+    postCode: "32146",
+    city: "Essen",
+    country: "Germany",
     items: [
       {
-        name: "Banner Design",
+        name: "Text Design",
         qty: 1,
         price: 156,
       },
       {
-        name: "Email Design",
+        name: " Site Design",
         qty: 2,
         price: 200,
       },
@@ -99,7 +96,7 @@ const initialState: Invoice[] = [
     surname: "Wilder",
     price: "1,800",
     paymentState: "Pending",
-    details: details,
+
     sentTo: "abs@mail.com",
     purpose: "sdf",
     paymentDue: "asdasd",
@@ -128,7 +125,6 @@ const initialState: Invoice[] = [
     surname: "Fletcher",
     price: "1,500",
     paymentState: "Pending",
-    details: details,
     sentTo: "abs@mail.com",
     purpose: "sdf",
     paymentDue: "asdasd",
@@ -157,7 +153,6 @@ const initialState: Invoice[] = [
     surname: "Monroe",
     price: "2,500",
     paymentState: "Paid",
-    details: details,
     sentTo: "abs@mail.com",
     purpose: "sdf",
     paymentDue: "asdasd",
@@ -186,7 +181,6 @@ const initialState: Invoice[] = [
     surname: "Manson",
     price: "3,500",
     paymentState: "Pending",
-    details: details,
     sentTo: "abs@mail.com",
     purpose: "sdf",
     paymentDue: "asdasd",
@@ -212,10 +206,9 @@ const initialState: Invoice[] = [
     id: makeid5(),
     date: "14 Jun 2023",
     name: "Mike ",
-    surname: "Tason",
+    surname: "Tyson",
     price: "6,500",
     paymentState: "Paid",
-    details: details,
     sentTo: "abs@mail.com",
     purpose: "sdf",
     paymentDue: "asdasd",
@@ -244,7 +237,6 @@ const initialState: Invoice[] = [
     surname: "Chan",
     price: "8,500",
     paymentState: "Draft",
-    details: details,
     sentTo: "abs@mail.com",
     purpose: "sdf",
     paymentDue: "asdasd",
@@ -273,7 +265,6 @@ const initialState: Invoice[] = [
     surname: "Lee",
     price: "3,800",
     paymentState: "Draft",
-    details: details,
     sentTo: "abs@mail.com",
     purpose: "sdf",
     paymentDue: "asdasd",
@@ -299,7 +290,7 @@ const initialState: Invoice[] = [
 
 const invoicesSlice = createSlice({
   name: "invoices",
-  initialState,
+  initialState: [],
   reducers: {
     addInvoice: (state, action) => {
       return [...state, action.payload];
