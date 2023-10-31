@@ -290,7 +290,7 @@ const initialState: Invoice[] = [
 
 const invoicesSlice = createSlice({
   name: "invoices",
-  initialState: [],
+  initialState,
   reducers: {
     addInvoice: (state, action) => {
       return [...state, action.payload];
