@@ -7,8 +7,6 @@ import { useSelector } from "react-redux";
 import noDataPicture from "../../../../../assets/img/noDataPicture.svg";
 
 const List = () => {
-  console.log(addInvoice);
-
   const invoices = useSelector(getInvoices);
   return (
     <div className="flex  w-[45.625rem]  my-0 mx-auto  ">

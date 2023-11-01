@@ -8,7 +8,6 @@ export type Invoice = {
   sentTo: string;
   purpose: string;
   paymentDue: string;
-  customerAdress: string;
   streetAdress: string;
   postCode: string;
   city: string;

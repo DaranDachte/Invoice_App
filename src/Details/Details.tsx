@@ -1,17 +1,52 @@
 import { useNavigate, useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import { deleteInvoice, updateInvoice } from "../store/slices/invoicesSlice";
 import backToList from "../assets/img/backToList.svg";
 import paidRound from "../assets/img/paidRound.svg";
 import pendingRound from "../assets/img/pendingRound.svg";
 import draftRound from "../assets/img/draftRound.svg";
 import React from "react";
+import noDataPicture from "../assets/img/noDataPicture.svg";
 const Details = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const handleDeleteVacancy = () => {
+    dispatch(deleteInvoice(id));
+    () => navigate(-1);
+  };
+
+  const handleMarkAsPaid = () => {
+    if (
+      invoiceDetails.paymentState === "Pending" ||
+      invoiceDetails.paymentState === "Draft"
+    ) {
+      const updatedInvoice = { ...invoiceDetails, paymentState: "Paid" };
+      dispatch(updateInvoice(updatedInvoice));
+    }
+  };
 
   const invoices = useSelector((state) => state.invoices);
   const { id } = useParams();
 
   const invoiceDetails = invoices.filter((invoice) => invoice.id === id)[0];
+
+  if (!invoiceDetails) {
+    return (
+      <div>
+        <div>
+          <img src={noDataPicture} alt="noDataPicture" />{" "}
+        </div>
+        <div>
+          <h3>There is nothing here</h3>
+          <p>
+            Create an invoice by clicking the New Invoice button and get started
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className=" flex flex-col w-[45.625rem]  my-0 mx-auto h-screen bg-[#F8F8FB]">
@@ -55,10 +90,16 @@ const Details = () => {
           <div className=" flex items-center justify-center  bg-[#F9FAFE]  w-[4.5625rem] h-[3rem] rounded-3xl">
             <p className=" text-[#7E88C3]"> Edit</p>
           </div>
-          <div className="bg-[#EC5757]  flex items-center  w-[5.5625rem] h-[3rem] ml-[0.5rem] justify-center rounded-3xl">
+          <div
+            onClick={() => handleDeleteVacancy(invoiceDetails.id)}
+            className="bg-[#EC5757]  flex items-center cursor-pointer  w-[5.5625rem] h-[3rem] ml-[0.5rem] justify-center rounded-3xl"
+          >
             <p className="text-[#fff]">Delete</p>
           </div>
-          <div className="flex items-center justify-center ml-[0.5rem] bg-[#7C5DFA] w-[8.1875rem] h-[3rem] rounded-3xl">
+          <div
+            onClick={handleMarkAsPaid}
+            className="flex items-center cursor-pointer justify-center ml-[0.5rem] bg-[#7C5DFA] w-[8.1875rem] h-[3rem] rounded-3xl"
+          >
             <p className="text-[#fff]">Mark as Paid</p>
           </div>
         </div>
@@ -86,7 +127,7 @@ const Details = () => {
             </div>
           </div>
         </div>
-        <div className="grid grid-cols-3 gap-4 mt-[2rem]">
+        <div className="grid grid-cols-3  mt-[2rem]">
           <div>
             <p className="text-[#7E88C3] font-medium text-[0.8125rem]">
               Invoice Date
