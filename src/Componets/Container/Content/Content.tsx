@@ -10,6 +10,7 @@ const Content = () => {
         <Route path="/" element={<InvoiceList />} />
         <Route path="/details/:id" element={<Details />} />
         <Route path="/addNew" element={<AddEditInvoice />} />
+        <Route path="/edit/:id" element={<AddEditInvoice />} />
       </Routes>
     </div>
   );
