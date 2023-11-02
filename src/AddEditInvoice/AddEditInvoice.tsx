@@ -1,24 +1,51 @@
 import ReactDOM from "react-dom";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
-import { addInvoice } from "../store/slices/invoicesSlice";
-import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { addInvoice, updateInvoice } from "../store/slices/invoicesSlice";
+import { Link, useParams } from "react-router-dom";
+import { makeid5 } from "../Helpers/MakeId";
+
 const AddEditInvoice = () => {
   const dispatch = useDispatch();
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+
+  const invoices = useSelector((state: RootState) => state.invoices);
+  const { id } = useParams();
+
+  const defaultEditForm = {
+    date: "",
+    name: " ",
+    sentTo: "",
+    purpose: "",
+    paymentDue: "",
+    streetAdress: " ",
+    postCode: "",
+    city: "",
+    country: "",
+  };
+
+  const invoiceInfo = invoices.filter((invoice) => invoice.id === id)[0];
+  const defaultValues = invoiceInfo ? invoiceInfo : defaultEditForm;
+
+  const { register, handleSubmit } = useForm({
+    defaultValues,
+  });
 
   return ReactDOM.createPortal(
-    <div className="w-[44.9375rem] h-full">
-      <Link to={"/"}>Go Back</Link>
-      <aside>
-        <form onSubmit={handleSubmit((data) => dispatch(addInvoice(data)))}>
-          <h2>
-            <p>Edit: #ID</p>
-          </h2>
+    <div className="  flex backdrop-blur-sm fixed inset-y-0 left-0 z-40">
+      {/* <Link to={"/"}>Go Back</Link>*/}
+      <aside className="relative w-1/3 h-full ">
+        <form
+          onSubmit={handleSubmit((data) => {
+            if (invoiceInfo) {
+              const updatedInvoice = { ...invoiceInfo, ...data };
+              dispatch(updateInvoice(updatedInvoice));
+            } else {
+              const newInvoice = { ...data, id: makeid5() };
+              dispatch(addInvoice(newInvoice));
+            }
+          })}
+        >
+          <h2>{invoiceInfo ? <p>Edit: #{invoiceInfo.id} </p> : ""}</h2>
           <h3>
             <p>Bill to</p>
           </h3>
@@ -26,6 +53,7 @@ const AddEditInvoice = () => {
             <span>Client's Name</span>
             <input {...register("name")} type="text" />
           </label>
+
           <label htmlFor="email">
             <span>Email</span>
             <input type="email" {...register("email")} />
