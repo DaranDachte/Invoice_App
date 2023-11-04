@@ -1,10 +1,10 @@
 import List from "./List/List";
-import ListHeader from "./ListHeader/ListHeader";
+import Header from "../../../../Header/Header";
 
 const InvoiceList = () => {
   return (
     <div>
-      <ListHeader />
+      <Header />
       <List />
     </div>
   );
