@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { Invoice } from "../../Helpers/domain";
 import { makeid5 } from "../../Helpers/MakeId";
+import { RootState } from "../store";
 
 const initialState: Invoice[] = [
   {
@@ -299,6 +300,6 @@ const invoicesSlice = createSlice({
 export const { addInvoice, updateInvoice, deleteInvoice } =
   invoicesSlice.actions;
 
-export const getInvoices = (state) => state.invoices;
+export const getInvoices = (state: RootState) => state.invoices;
 
 export default invoicesSlice.reducer;

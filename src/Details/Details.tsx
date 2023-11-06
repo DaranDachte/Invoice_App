@@ -1,23 +1,28 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { deleteInvoice, updateInvoice } from "../store/slices/invoicesSlice";
+import {
+  deleteInvoice,
+  getInvoices,
+  updateInvoice,
+} from "../store/slices/invoicesSlice";
 import backToList from "../assets/img/backToList.svg";
 import paidRound from "../assets/img/paidRound.svg";
 import pendingRound from "../assets/img/pendingRound.svg";
 import draftRound from "../assets/img/draftRound.svg";
 import React from "react";
+import { Invoice } from "../Helpers/domain";
 
 const Details = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const handleDelete = (id) => {
+  const handleDelete = (id: string) => {
     dispatch(deleteInvoice(id));
     navigate("/");
   };
 
-  const handleEdit = (id) => {
+  const handleEdit = (id: string) => {
     navigate(`/edit/${id}`);
   };
   const handleMarkAsPaid = () => {
@@ -30,10 +35,12 @@ const Details = () => {
     }
   };
 
-  const invoices = useSelector((state) => state.invoices);
+  const invoices = useSelector(getInvoices);
   const { id } = useParams();
 
-  const invoiceDetails = invoices.filter((invoice) => invoice.id === id)[0];
+  const invoiceDetails = invoices.filter(
+    (invoice: Invoice) => invoice.id === id
+  )[0];
 
   return (
     <div className=" flex flex-col w-[45.625rem]  my-0 mx-auto h-screen bg-[#F8F8FB]">
@@ -171,21 +178,26 @@ const Details = () => {
             Total
           </div>
 
-          {invoiceDetails.items.map((item, index) => (
-            <React.Fragment key={index}>
-              <div>{item.name}</div>
-              <div className="pl-[8rem] text-[0.9375rem] font-bold text-[#7E88C3]">
-                {item.qty}
-              </div>
-              <div className="pl-[8rem] text-[0.9375rem] font-bold text-[#7E88C3] ">
-                ${""}
-                {item.price}
-              </div>
-              <div className="pl-[6rem] font-bold">
-                ${item.qty * item.price}
-              </div>
-            </React.Fragment>
-          ))}
+          {invoiceDetails.items.map(
+            (
+              item: { name: string; qty: number; price: number },
+              index: number
+            ) => (
+              <React.Fragment key={index}>
+                <div>{item.name}</div>
+                <div className="pl-[8rem] text-[0.9375rem] font-bold text-[#7E88C3]">
+                  {item.qty}
+                </div>
+                <div className="pl-[8rem] text-[0.9375rem] font-bold text-[#7E88C3] ">
+                  ${""}
+                  {item.price}
+                </div>
+                <div className="pl-[6rem] font-bold">
+                  ${item.qty * item.price}
+                </div>
+              </React.Fragment>
+            )
+          )}
         </div>
         <div className="flex justify-between h-[5rem] bg-[#373B53] px-[2rem]  items-center rounded-b-lg">
           <div className="text-[#FFFFFF] text-[0.8125rem] tracking-[-0.00625rem] font-medium">
@@ -193,10 +205,13 @@ const Details = () => {
           </div>
           <div className="text-[#FFFFFF] font-bold">
             ${" "}
-            {invoiceDetails.items.reduce((prev, curr) => {
-              const totalPrice = curr.qty * curr.price;
-              return prev + totalPrice;
-            }, 0)}
+            {invoiceDetails.items.reduce(
+              (prev: number, curr: { qty: number; price: number }) => {
+                const totalPrice = curr.qty * curr.price;
+                return prev + totalPrice;
+              },
+              0
+            )}
           </div>
         </div>
       </div>

@@ -1,32 +1,18 @@
-import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import paidRound from "../../../../../../assets/img/paidRound.svg";
 import pendingRound from "../../../../../../assets/img/pendingRound.svg";
 import draftRound from "../../../../../../assets/img/draftRound.svg";
 import details from "../../../../../../assets/img/details.svg";
-export type InvoiceT = {
-  id: string;
-  date: string;
-  name: string;
-  surname: string;
-  price: string;
+import { Invoice } from "../../../../../../Helpers/domain";
+
+type ItemProps = {
+  invoice: Invoice;
 };
 
-const Item = ({ invoice }) => {
-  const invoicePreview = {
-    id: invoice.id,
-    date: invoice.date,
-    name: invoice.name,
-    surname: invoice.surname,
-    price: invoice.price,
-    paymentState: invoice.paymentState,
-    details: invoice.details,
-  };
-
+const Item: React.FC<ItemProps> = ({ invoice }) => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
-  const viewDetails = (id) => {
+  const viewDetails = (id: string) => {
     navigate(`/details/${id}`);
   };
 

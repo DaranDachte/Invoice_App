@@ -3,10 +3,10 @@ import Item from "./Item/Item";
 import { useSelector } from "react-redux";
 import noDataPicture from "../../../../../assets/img/noDataPicture.svg";
 import { getCurrentFilter } from "../../../../../store/slices/filterSlice";
+import { Invoice } from "../../../../../Helpers/domain";
 const List = () => {
   const invoices = useSelector(getInvoices);
   const currentFilter = useSelector(getCurrentFilter);
-  console.log(currentFilter);
 
   return (
     <>
@@ -14,13 +14,13 @@ const List = () => {
         {invoices.length ? (
           <ul>
             {invoices
-              .filter((invoice) => {
+              .filter((invoice: Invoice) => {
                 return currentFilter !== "noFilter"
                   ? invoice.paymentState.toLowerCase() === currentFilter
                   : true;
               })
 
-              .map((invoice) => (
+              .map((invoice: Invoice) => (
                 <Item key={invoice.id} invoice={invoice} />
               ))}
           </ul>
