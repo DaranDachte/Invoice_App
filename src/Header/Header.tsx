@@ -7,8 +7,8 @@ import { setFilter } from "../store/slices/filterSlice";
 const Header = () => {
   const dispatch = useDispatch();
   const invoicesLength = useSelector(getInvoices).length;
-  const handleChange = (e) => {
-    dispatch(setFilter(e.target.value));
+  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>): void => {
+    dispatch(setFilter(event.target.value));
   };
 
   return (

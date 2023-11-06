@@ -5,7 +5,7 @@ import AddEditInvoice from "../../../AddEditInvoice/AddEditInvoice";
 
 const Content = () => {
   return (
-    <div>
+    <div className="w-11/12">
       <Routes>
         <Route path="/" element={<InvoiceList />} />
         <Route path="/details/:id" element={<Details />} />
