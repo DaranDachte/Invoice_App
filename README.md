@@ -1,5 +1,6 @@
 This app shows a sheet of invoices that you can sort by status and also create a new invoice.  By clicking on the purple corner, you can see the details of each invoice, change its status, edit or delete it.
-https://invoice-app-iota-peach.vercel.app/ 
+<a href=["[https://tip-calculator-lake-alpha.vercel.app/](https://invoice-app-iota-peach.vercel.app/)](https://invoice-app-iota-peach.vercel.app/)" target="_blank">Invoice App</a>
+ 
 # Invoice_App
 ![HomePage](https://github.com/DaranDachte/Invoice_App/assets/96144068/d057504a-ba12-4edc-9da2-0cc94a62ee06)
 
